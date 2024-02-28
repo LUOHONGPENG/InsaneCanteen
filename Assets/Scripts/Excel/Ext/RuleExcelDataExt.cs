@@ -22,9 +22,8 @@ public partial class RuleExcelData
             RuleExcelItem tempItem = ruleItems[i];
             if(tempItem.array_foodID.Count > 0 && tempItem.array_foodNum.Count > 0 && tempItem.array_foodID.Count == tempItem.array_foodNum.Count)
             {
-                RuleContainer rule = new RuleContainer(tempItem.array_foodID, tempItem.array_foodNum);
+                RuleContainer rule = new RuleContainer(tempItem.array_foodID, tempItem.array_foodNum,tempItem.resultID);
                 listRule.Add(rule);
-                Debug.Log(ruleItems[i].id);
             }
         }
     }
@@ -35,16 +34,31 @@ public partial class RuleExcelData
         list.Sort((y, x) => { return x.priority.CompareTo(y.priority); });
     }
 
+    //遍历搜索混合结果
+    public int SearchBlendResult(List<Vector2Int> existFood)
+    {
+        for(int i = 0;i < listRule.Count; i++)
+        {
+            RuleContainer tempRule = listRule[i];
+            if (tempRule.CheckMatchThisRule(existFood))
+            {
+                return tempRule.resultID;
+            }
+        }
+        return -1;
+    }
+
     #region Rule Container
     //The container for the rules of the conbination of food
     //初始化之后在局内方便检测是否满足配方条件的容器
     public class RuleContainer
     {
         public Dictionary<int, int> dicNeedFood = new Dictionary<int, int>();
+        public int resultID = -1;
 
         //Import the array of needed foodID and the number
         //导入需要满足的食材ID及数量的数组/列表
-        public RuleContainer(List<int> need_foodID,List<int> need_foodNum)
+        public RuleContainer(List<int> need_foodID,List<int> need_foodNum,int resultID)
         {
             dicNeedFood.Clear();
             //Check whether the lists are valid again
@@ -62,6 +76,8 @@ public partial class RuleExcelData
                         dicNeedFood.Add(foodID, foodNum);
                     }
                 }
+                //录入结果ID
+                this.resultID = resultID;
             }
         }
 
