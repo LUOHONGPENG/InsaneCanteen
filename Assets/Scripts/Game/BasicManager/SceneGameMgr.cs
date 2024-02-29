@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SceneGameMgr : MonoBehaviour
 {
+    public Camera mapCamera;
+    public Camera uiCamera;
     public MapMgr mapMgr;
     public UIMgr uiMgr;
     public SceneGameData sceneGameData;

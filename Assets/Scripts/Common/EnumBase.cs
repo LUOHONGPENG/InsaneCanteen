@@ -6,3 +6,10 @@ public enum SceneName
 {
     Game
 }
+
+public enum InputState
+{
+    Build,
+    Delete,
+    Play
+}

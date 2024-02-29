@@ -27,8 +27,22 @@ public partial class PublicTool
         float posY = (posID.y - centerY) * GameGlobal.mapTileSize;
 
 
-        return new Vector3(posX, posY,1f) + new Vector3(-3, -0.25f, 0);
+        return new Vector3(posX, posY,1f) + GameGlobal.mapDelta;
     }
+
+    public static Vector2Int ConvertPosToID(Vector3 pos)
+    {
+        int centerX = (GameGlobal.mapSizeX - 1) / 2;
+        int centerY = (GameGlobal.mapSizeY - 1) / 2;
+
+        Vector3 tempPos = pos - GameGlobal.mapDelta;
+
+        int posIDX = Mathf.RoundToInt(tempPos.x / GameGlobal.mapTileSize) + centerX;
+        int posIDY = Mathf.RoundToInt(tempPos.y / GameGlobal.mapTileSize) + centerY;
+        return new Vector2Int(posIDX, posIDY);
+    }
+
+
 
     #region Excel
     //快速获取表格数据
