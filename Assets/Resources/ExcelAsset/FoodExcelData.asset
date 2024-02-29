@@ -15,11 +15,16 @@ MonoBehaviour:
   items:
   - id: 1001
     name: "\u841D\u535C"
+    iconUrl: imgFood_carrot
   - id: 1002
     name: "\u874C\u86AA"
+    iconUrl: 
   - id: 2001
     name: "\u841D\u535C\u7CA5"
+    iconUrl: imgFood_carrotCongee
   - id: 2002
     name: "\u874C\u86AA\u7CA5"
+    iconUrl: 
   - id: 2003
     name: "\u841D\u535C\u874C\u86AA\u7CA5"
+    iconUrl: 
