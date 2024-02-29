@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,4 +36,37 @@ public class SceneGameMgr : MonoBehaviour
 
         yield break;
     }
+
+    #region EventDeal
+
+
+    public void OnEnable()
+    {
+        EventCenter.Instance.AddEventListener("SetFacility", SetFacilityEvent);
+
+    }
+
+    public void OnDestroy()
+    {
+        EventCenter.Instance.RemoveEventListener("SetFacility", SetFacilityEvent);
+
+    }
+
+    private void SetFacilityEvent(object arg0)
+    {
+        SetFacilityInfo info = (SetFacilityInfo)arg0;
+        if(sceneGameData.CheckSetFaclityValid(info.typeID, info.posID))
+        {
+            //在数据层放置Facility
+            FacilitySetData newFacilityData = sceneGameData.AddFacility(info.typeID, info.posID);
+            //在表现层放置Facility
+            mapMgr.AddFacility(newFacilityData);
+        }
+        else
+        {
+            Debug.Log("Not Enough Space");
+        }
+    }
+
+    #endregion
 }

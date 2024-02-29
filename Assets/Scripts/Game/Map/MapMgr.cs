@@ -51,14 +51,14 @@ public class MapMgr : MonoBehaviour
         {
             FacilitySetData facilityData = sceneGameData.listFacility[i];
 
-            GameObject objFacility = GameObject.Instantiate(pfFacility, tfFacility);
-            MapFacilityItem itemFacility = objFacility.GetComponent<MapFacilityItem>();
-            itemFacility.Init(facilityData);
+            AddFacility(facilityData);
         }
     }
 
-    public void AddFacility()
+    public void AddFacility(FacilitySetData facilityData)
     {
-
+        GameObject objFacility = GameObject.Instantiate(pfFacility, tfFacility);
+        MapFacilityItem itemFacility = objFacility.GetComponent<MapFacilityItem>();
+        itemFacility.Init(facilityData);
     }
 }

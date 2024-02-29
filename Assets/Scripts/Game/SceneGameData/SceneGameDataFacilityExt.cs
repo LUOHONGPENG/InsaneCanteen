@@ -24,7 +24,7 @@ public partial class SceneGameData
     /// <summary>
     /// 放置设施（增）
     /// </summary>
-    public void AddFacility(int typeID, Vector2Int posID)
+    public FacilitySetData AddFacility(int typeID, Vector2Int posID)
     {
         //检查是否位置被占了或者是否达到设施上限
 
@@ -33,6 +33,8 @@ public partial class SceneGameData
         FacilitySetData newFacilityData = new FacilitySetData(facilityKeyID,typeID,posID);
         listFacility.Add(newFacilityData);
         dicFacility.Add(facilityKeyID, newFacilityData);
+
+        return newFacilityData;
     }
 
     /// <summary>
@@ -52,6 +54,7 @@ public partial class SceneGameData
         }
     }
 
+
     /// <summary>
     /// 获取（查）
     /// </summary>
@@ -69,6 +72,44 @@ public partial class SceneGameData
         }
     }
     #endregion
+
+
+    #region Faclity相关辅助方法
+
+    public bool CheckSetFaclityValid(int typeID,Vector2Int posID)
+    {
+        FacilityExcelItem excelItem = PublicTool.GetFacilityItem(typeID);
+        List<Vector2Int> listToOccupy = PublicTool.CalculateFacilityOccupy(posID, excelItem.sizeX, excelItem.sizeY);
+        List<Vector2Int> listNowOccupy = GetAllFacilityOccupy();
+
+        //检查是否出界
+        if (posID.x < 0)
+        {
+            return false;
+        }
+        if (posID.x + excelItem.sizeX - 1 > GameGlobal.mapSizeX)
+        {
+            return false;
+        }
+        if (posID.y < 0)
+        {
+            return false;
+        }
+        if (posID.y + excelItem.sizeY - 1 > GameGlobal.mapSizeY)
+        {
+            return false;
+        }
+
+        //检查是否被占用
+        for (int i = 0;i < listToOccupy.Count; i++)
+        {
+            if (listNowOccupy.Contains(listToOccupy[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /// <summary>
     /// 获取全设施占据格
@@ -91,6 +132,8 @@ public partial class SceneGameData
         }
         return tempPos;
     }
+
+    #endregion
 }
 
 

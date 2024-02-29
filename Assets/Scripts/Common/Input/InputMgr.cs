@@ -112,6 +112,14 @@ public class InputMgr : MonoSingleton<InputMgr>
         if (isDragging)
         {
             isDragging = false;
+
+            //从UI处拖拽出Facility的情况
+            if(recordFacilityUIID > 0)
+            {
+                Vector2Int tarPosID = PublicTool.ConvertPosToID(GetMousePos());
+                EventCenter.Instance.EventTrigger("SetFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
+                recordFacilityUIID = -1;
+            }
             Debug.Log("ReleaseDrag");
         }
     }

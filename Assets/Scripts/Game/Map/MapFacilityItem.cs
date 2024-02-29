@@ -25,6 +25,7 @@ public class MapFacilityItem : MonoBehaviour
         this.transform.localPosition = basicPos + sizeDelta;
     }
 
+
     public FacilitySetData GetData()
     {
         return thisData;
