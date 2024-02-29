@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spFacility: {fileID: 3106023274081389161}
+  polyCol: {fileID: 191214648787000217}
 --- !u!1 &8356259283559798584
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4367751754934147010}
   - component: {fileID: 3106023274081389161}
-  - component: {fileID: 8291433369738850959}
+  - component: {fileID: 191214648787000217}
   m_Layer: 6
   m_Name: spFacility
   m_TagString: Untagged
@@ -131,8 +132,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8291433369738850959
-BoxCollider2D:
+--- !u!60 &191214648787000217
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,6 +155,10 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.87, y: 0.84}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.435, y: 0.42}
+      - {x: -0.435, y: -0.42}
+      - {x: 0.42499998, y: -0.42}
+      - {x: 0.435, y: -0.32999998}
+      - {x: 0.435, y: 0.42}

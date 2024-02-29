@@ -43,12 +43,14 @@ public class SceneGameMgr : MonoBehaviour
     public void OnEnable()
     {
         EventCenter.Instance.AddEventListener("SetFacility", SetFacilityEvent);
+        EventCenter.Instance.AddEventListener("DeleteFacility", DeleteFacilityEvent);
 
     }
 
     public void OnDestroy()
     {
         EventCenter.Instance.RemoveEventListener("SetFacility", SetFacilityEvent);
+        EventCenter.Instance.RemoveEventListener("DeleteFacility", DeleteFacilityEvent);
 
     }
 
@@ -76,7 +78,21 @@ public class SceneGameMgr : MonoBehaviour
 
     private void DeleteFacilityEvent(object arg0)
     {
+        int keyID = (int)arg0;
+        FacilitySetData tarData = sceneGameData.GetFacility(keyID);
 
+        //不许删盘子
+        if (tarData.typeID == 3001)
+        {
+            Debug.Log("Invalid Delete Target");
+        }
+        else
+        {
+            //先删表现层的Facility
+            mapMgr.RemoveFacility(keyID);
+            //再删数据层的
+            sceneGameData.RemoveFacility(keyID);
+        }
     }
 
 

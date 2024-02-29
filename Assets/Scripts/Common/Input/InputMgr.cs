@@ -178,7 +178,8 @@ public class InputMgr : MonoSingleton<InputMgr>
         if (hit.transform.parent.GetComponent<MapFacilityItem>() != null)
         {
             Debug.Log("HitFacility");
-            //EventCenter.Instance.EventTrigger("DeleteFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
+            MapFacilityItem item = hit.transform.parent.GetComponent<MapFacilityItem>();
+            EventCenter.Instance.EventTrigger("DeleteFacility", item.GetData().keyID);
         }
 
     }

@@ -84,7 +84,7 @@ public partial class SceneGameData
         {
             return false;
         }
-        if (posID.x + excelItem.sizeX - 1 > GameGlobal.mapSizeX)
+        if (posID.x + excelItem.sizeX - 1 >= GameGlobal.mapSizeX)
         {
             return false;
         }
@@ -92,7 +92,7 @@ public partial class SceneGameData
         {
             return false;
         }
-        if (posID.y + excelItem.sizeY - 1 > GameGlobal.mapSizeY)
+        if (posID.y + excelItem.sizeY - 1 >= GameGlobal.mapSizeY)
         {
             return false;
         }

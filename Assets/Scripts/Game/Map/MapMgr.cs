@@ -10,6 +10,7 @@ public class MapMgr : MonoBehaviour
     [Header("Facility")]
     public Transform tfFacility;
     public GameObject pfFacility;
+    public Dictionary<int, MapFacilityItem> dicFacility = new Dictionary<int, MapFacilityItem>();
 
     private SceneGameData sceneGameData;
 
@@ -46,8 +47,9 @@ public class MapMgr : MonoBehaviour
     public void InitFacility()
     {
         PublicTool.ClearChildItem(tfFacility);
+        dicFacility.Clear();
 
-        for(int i = 0; i < sceneGameData.listFacility.Count; i++)
+        for (int i = 0; i < sceneGameData.listFacility.Count; i++)
         {
             FacilitySetData facilityData = sceneGameData.listFacility[i];
 
@@ -60,5 +62,16 @@ public class MapMgr : MonoBehaviour
         GameObject objFacility = GameObject.Instantiate(pfFacility, tfFacility);
         MapFacilityItem itemFacility = objFacility.GetComponent<MapFacilityItem>();
         itemFacility.Init(facilityData);
+        dicFacility.Add(facilityData.keyID, itemFacility);
+    }
+
+    public void RemoveFacility(int keyID)
+    {
+        if (dicFacility.ContainsKey(keyID))
+        {
+            MapFacilityItem itemFacility = dicFacility[keyID];
+            dicFacility.Remove(keyID);
+            Destroy(itemFacility.gameObject);
+        }
     }
 }
