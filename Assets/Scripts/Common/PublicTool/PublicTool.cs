@@ -42,7 +42,7 @@ public partial class PublicTool
         return new Vector2Int(posIDX, posIDY);
     }
 
-    #region ForThisProject
+    #region Convenient
 
     public static SceneGameMgr GetSceneGameMgr()
     {
@@ -53,9 +53,31 @@ public partial class PublicTool
     {
         return GetSceneGameMgr().sceneGameData;
     }
-
     #endregion
 
+    #region ForThisProject
+    /// <summary>
+    /// 计算家具的占据范围
+    /// </summary>
+    /// <param name="posID"></param>
+    /// <param name="sizeX"></param>
+    /// <param name="sizeY"></param>
+    /// <returns></returns>
+    public static List<Vector2Int> CalculateFacilityOccupy(Vector2Int posID, int sizeX,int sizeY)
+    {
+        List<Vector2Int> tempPos = new List<Vector2Int>();
+        for (int i = 0; i < sizeX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                tempPos.Add(new Vector2Int(posID.x + i, posID.y + j));
+            }
+        }
+        return tempPos;
+    }
+
+
+    #endregion
 
     #region Excel
     //快速获取表格数据

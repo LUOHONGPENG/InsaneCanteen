@@ -18,10 +18,13 @@ public class MapMgr : MonoBehaviour
         sceneGameData = PublicTool.GetSceneGameData();
 
         InitMapBG();
-        ClearUpdateFacility();
+        InitFacility();
 
     }
 
+    /// <summary>
+    /// 初始化的时候建立地图版
+    /// </summary>
     public void InitMapBG()
     {
         PublicTool.ClearChildItem(tfTile);
@@ -37,7 +40,10 @@ public class MapMgr : MonoBehaviour
         }
     }
 
-    public void ClearUpdateFacility()
+    /// <summary>
+    /// 初始化设施，比如在里面塞默认的盘子
+    /// </summary>
+    public void InitFacility()
     {
         PublicTool.ClearChildItem(tfFacility);
 
@@ -48,8 +54,11 @@ public class MapMgr : MonoBehaviour
             GameObject objFacility = GameObject.Instantiate(pfFacility, tfFacility);
             MapFacilityItem itemFacility = objFacility.GetComponent<MapFacilityItem>();
             itemFacility.Init(facilityData);
-            Debug.Log(facilityData.typeID);
         }
-        
+    }
+
+    public void AddFacility()
+    {
+
     }
 }

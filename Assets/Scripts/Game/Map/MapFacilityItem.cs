@@ -12,14 +12,17 @@ public class MapFacilityItem : MonoBehaviour
     {
         thisData = facilityData;
 
-        FacilityExcelItem excelItem = PublicTool.GetFacilityItem(thisData.typeID);
-        spFacility.sprite = Resources.Load("Sprite/Facility/" + excelItem.iconUrl, typeof(Sprite)) as Sprite;
+        spFacility.sprite = Resources.Load("Sprite/Facility/" + thisData.GetExcelItem().iconUrl, typeof(Sprite)) as Sprite;
         SetSelfPos();
     }
 
     public void SetSelfPos()
     {
-        this.transform.localPosition = PublicTool.ConvertPosFromID(thisData.posID);
+        Vector3 basicPos = PublicTool.ConvertPosFromID(thisData.posID);
+        Vector3 sizeDelta = new Vector3(0.5f * GameGlobal.mapTileSize * (thisData.sizeX-1),
+            0.5f * GameGlobal.mapTileSize * (thisData.sizeY-1), 0);
+
+        this.transform.localPosition = basicPos + sizeDelta;
     }
 
     public FacilitySetData GetData()

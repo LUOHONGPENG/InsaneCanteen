@@ -10,6 +10,8 @@ public partial class FacilityExcelItem : ExcelItemBase
 {
 	public string name;
 	public string iconUrl;
+	public int sizeX;
+	public int sizeY;
 }
 
 [CreateAssetMenu(fileName = "FacilityExcelData", menuName = "Excel To ScriptableObject/Create FacilityExcelData", order = 1)]
@@ -32,6 +34,8 @@ public class FacilityAssetAssignment
 			items[i].id = Convert.ToInt32(allItemValueRowList[i]["id"]);
 			items[i].name = allItemValueRowList[i]["name"];
 			items[i].iconUrl = allItemValueRowList[i]["iconUrl"];
+			items[i].sizeX = Convert.ToInt32(allItemValueRowList[i]["sizeX"]);
+			items[i].sizeY = Convert.ToInt32(allItemValueRowList[i]["sizeY"]);
 		}
 		FacilityExcelData excelDataAsset = ScriptableObject.CreateInstance<FacilityExcelData>();
 		excelDataAsset.items = items;

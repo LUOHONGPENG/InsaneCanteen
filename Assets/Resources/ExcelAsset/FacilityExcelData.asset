@@ -16,12 +16,20 @@ MonoBehaviour:
   - id: 1001
     name: "\u841D\u535C\u7530"
     iconUrl: imgFacility_carrotFarm
+    sizeX: 2
+    sizeY: 2
   - id: 1002
     name: "\u9752\u86D9\u5375\u6C60"
     iconUrl: 
+    sizeX: 2
+    sizeY: 2
   - id: 2001
     name: "\u9505"
     iconUrl: imgFacility_pot
+    sizeX: 2
+    sizeY: 2
   - id: 3001
     name: "\u76D8\u5B50"
     iconUrl: imgFacility_plate
+    sizeX: 2
+    sizeY: 1
