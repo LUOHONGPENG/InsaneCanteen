@@ -18,6 +18,18 @@ public partial class PublicTool
         }
     }
 
+    public static Vector3 ConvertPosFromID(Vector2Int posID)
+    {
+        int centerX = (GameGlobal.mapSizeX - 1) / 2;
+        int centerY = (GameGlobal.mapSizeY - 1) / 2;
+
+        float posX = (posID.x - centerX) * GameGlobal.mapTileSize;
+        float posY = (posID.y - centerY) * GameGlobal.mapTileSize;
+
+
+        return new Vector3(posX, posY,1f) + new Vector3(-3, -0.25f, 0);
+    }
+
     #region Excel
     //快速获取表格数据
     public static FacilityExcelItem GetFacilityItem(int facilityID)

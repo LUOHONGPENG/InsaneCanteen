@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tfTile: {fileID: 5982675828628016124}
-  pfTile: {fileID: 0}
+  pfTile: {fileID: 4823380443330624125, guid: aef44ea57458f654aa1d9e728a7bae00, type: 3}
 --- !u!1 &4485173901409116766
 GameObject:
   m_ObjectHideFlags: 0

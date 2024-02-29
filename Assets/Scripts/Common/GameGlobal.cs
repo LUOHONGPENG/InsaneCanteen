@@ -6,9 +6,9 @@ public static class GameGlobal
 {
     #region Map
 
-    public static int mapSizeX = 20;
-    public static int mapSizeY = 20;
-
+    public static int mapSizeX = 18;
+    public static int mapSizeY = 18;
+    public static float mapTileSize = 0.5f;
 
 
     #endregion

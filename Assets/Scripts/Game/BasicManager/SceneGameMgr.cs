@@ -26,6 +26,7 @@ public class SceneGameMgr : MonoBehaviour
         //初始化各模块
         sceneGameData = new SceneGameData();
         sceneGameData.Init();
+        mapMgr.Init();
         uiMgr.Init();
 
         isInit = true;
