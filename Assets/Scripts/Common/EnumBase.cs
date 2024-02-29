@@ -13,3 +13,9 @@ public enum InputState
     Delete,
     Play
 }
+
+public enum SlotType
+{
+    Out,
+    In
+}

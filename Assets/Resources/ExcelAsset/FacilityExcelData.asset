@@ -32,8 +32,8 @@ MonoBehaviour:
     iconUrl: imgFacility_pot
     sizeX: 2
     sizeY: 2
-    outSlot: 3
-    inSlot: 1
+    outSlot: 1
+    inSlot: 3
   - id: 3001
     name: "\u76D8\u5B50"
     iconUrl: imgFacility_plate

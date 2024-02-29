@@ -11,6 +11,10 @@ public static class GameGlobal
     public static float mapTileSize = 0.5f;
     public static Vector3 mapDelta = new Vector3(-3, -0.25f, 0);
 
+    public static float mapSlotSpacingX = 0.3f;
+    public static float mapSlotSpacingY = 0.3f;
+
+
     #endregion
 
     public static int[] testFacilityID = { 1001,2001 };

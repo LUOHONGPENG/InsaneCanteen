@@ -18,3 +18,18 @@ public struct SetFacilityInfo
     }
 }
 
+public struct SetLinkInfo
+{
+    public int outKeyID;
+    public int outSlotID;
+    public int inKeyID;
+    public int inSlotID;
+
+    public SetLinkInfo(int outKeyID,int outSlotID,int inKeyID,int inSlotID)
+    {
+        this.outKeyID = outKeyID;
+        this.outSlotID = outSlotID;
+        this.inKeyID = inKeyID;
+        this.inSlotID = inSlotID;
+    }
+}

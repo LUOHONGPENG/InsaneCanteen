@@ -80,6 +80,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spFacility: {fileID: 3106023274081389161}
   polyCol: {fileID: 191214648787000217}
+  tfSlotOut: {fileID: 1784100715856077949}
+  pfSlotOut: {fileID: 6313518922203458827, guid: 44089e4925ccb754ea52456c33ae961f, type: 3}
+  tfSlotIn: {fileID: 3870544636169032391}
+  pfSlotIn: {fileID: 5727616532508482568, guid: 2f49eaeda4089b047a93483ec0d38589, type: 3}
 --- !u!1 &8356259283559798584
 GameObject:
   m_ObjectHideFlags: 0
