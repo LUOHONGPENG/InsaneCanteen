@@ -11,6 +11,9 @@ public class MapMgr : MonoBehaviour
     public Transform tfFacility;
     public GameObject pfFacility;
     public Dictionary<int, MapFacilityItem> dicFacility = new Dictionary<int, MapFacilityItem>();
+    [Header("Line")]
+    public Transform tfLine;
+    public GameObject pfLine;
 
     private SceneGameData sceneGameData;
 
@@ -20,7 +23,7 @@ public class MapMgr : MonoBehaviour
 
         InitMapBG();
         InitFacility();
-
+        UpdateLine();
     }
 
     /// <summary>
@@ -41,6 +44,7 @@ public class MapMgr : MonoBehaviour
         }
     }
 
+    #region Facility 设施相关
     /// <summary>
     /// 初始化设施，比如在里面塞默认的盘子
     /// </summary>
@@ -74,4 +78,35 @@ public class MapMgr : MonoBehaviour
             Destroy(itemFacility.gameObject);
         }
     }
+    #endregion
+
+    #region Line 连线相关
+
+    public void UpdateLine()
+    {
+        PublicTool.ClearChildItem(tfLine);
+
+        for(int i = 0; i < sceneGameData.listFacility.Count; i++)
+        {
+            FacilitySetData thisFacility = sceneGameData.listFacility[i];
+            for(int j = 0; j < thisFacility.listSlotOut.Count; j++)
+            {
+                //检测是否有连接
+                if (thisFacility.listSlotOut[j].x >= 0)
+                {
+                    Vector2Int linkInfo = thisFacility.listSlotOut[j];
+                    GameObject objLine = GameObject.Instantiate(pfLine, tfLine);
+                    MapLineItem itemLine = objLine.GetComponent<MapLineItem>();
+                    if(dicFacility.ContainsKey(thisFacility.keyID) && dicFacility.ContainsKey(linkInfo.x))
+                    {
+                        MapSlotItem outSlot = dicFacility[thisFacility.keyID].listSlotOut[j];
+                        MapSlotItem inSlot = dicFacility[linkInfo.x].listSlotIn[linkInfo.y];
+                        itemLine.Init(outSlot, inSlot);
+                    }
+                }
+            }
+        }
+
+    }
+    #endregion
 }

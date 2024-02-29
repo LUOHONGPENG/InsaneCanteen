@@ -14,6 +14,9 @@ public class MapFacilityItem : MonoBehaviour
     public GameObject pfSlotOut;
     public Transform tfSlotIn;
     public GameObject pfSlotIn;
+    //不用考虑删除，所以用list就好了，查找也方便
+    public List<MapSlotItem> listSlotOut = new List<MapSlotItem>();
+    public List<MapSlotItem> listSlotIn = new List<MapSlotItem>();
 
 
     private FacilitySetData thisData;
@@ -62,6 +65,7 @@ public class MapFacilityItem : MonoBehaviour
     {
         //表现层-创造出去的孔
         PublicTool.ClearChildItem(tfSlotOut);
+        listSlotOut.Clear();
         if (thisData.listSlotOut.Count > 0)
         {
             int maxSlotOut = thisData.listSlotOut.Count;
@@ -70,12 +74,14 @@ public class MapFacilityItem : MonoBehaviour
                 GameObject objSlot = GameObject.Instantiate(pfSlotOut, tfSlotOut);
                 MapSlotItem itemSlot = objSlot.GetComponent<MapSlotItem>();
                 itemSlot.Init(SlotType.Out, i, maxSlotOut, thisData.keyID);
+                listSlotOut.Add(itemSlot);
             }
         }
 
         //表现层-创造进入的孔
         PublicTool.ClearChildItem(tfSlotIn);
-        if(thisData.listSlotIn.Count > 0)
+        listSlotIn.Clear();
+        if (thisData.listSlotIn.Count > 0)
         {
             int maxSlotIn = thisData.listSlotIn.Count;
             for(int i = 0; i < maxSlotIn; i++)
@@ -83,6 +89,7 @@ public class MapFacilityItem : MonoBehaviour
                 GameObject objSlot = GameObject.Instantiate(pfSlotIn, tfSlotIn);
                 MapSlotItem itemSlot = objSlot.GetComponent<MapSlotItem>();
                 itemSlot.Init(SlotType.In, i, maxSlotIn, thisData.keyID);
+                listSlotIn.Add(itemSlot);
             }
         }
 
