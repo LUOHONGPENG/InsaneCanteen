@@ -12,15 +12,13 @@ public class MapLineItem : MonoBehaviour
     {
         this.outSlot = outSlot;
         this.inSlot = inSlot;
-    }
-
-    private void CreateLine()
-    {
-
+        UpdateLine();
     }
 
     private void UpdateLine()
     {
+        line.SetPosition(0, outSlot.transform.position);
+        line.SetPosition(1, inSlot.transform.position);
 
     }
 

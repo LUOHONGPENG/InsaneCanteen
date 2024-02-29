@@ -232,6 +232,13 @@ public class FacilitySetData
     {
         if(thisSlotID < listSlotOut.Count)
         {
+            Vector2Int otherInfo = listSlotOut[thisSlotID];
+            //如果本身已经有关联
+            if (otherInfo.x >= 0)
+            {
+                FacilitySetData otherData = PublicTool.GetSceneGameData().GetFacility(otherInfo.x);
+                otherData.DisjoinSlotIn(otherInfo.y);
+            }
             listSlotOut[thisSlotID] = new Vector2Int(otherKeyID, otherSlotID);
         }
     }
@@ -250,6 +257,13 @@ public class FacilitySetData
     {
         if (thisSlotID < listSlotIn.Count)
         {
+            //如果本身已经有关联
+            Vector2Int otherInfo = listSlotIn[thisSlotID];
+            if (otherInfo.x >= 0)
+            {
+                FacilitySetData otherData = PublicTool.GetSceneGameData().GetFacility(otherInfo.x);
+                otherData.DisjoinSlotOut(otherInfo.y);
+            }
             listSlotIn[thisSlotID] = new Vector2Int(otherKeyID, otherSlotID);
         }
     }

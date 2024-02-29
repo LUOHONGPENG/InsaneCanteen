@@ -159,10 +159,10 @@ public class InputMgr : MonoSingleton<InputMgr>
 
             //检查是否开始拖拽点为出孔
             RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapSlot"));
-            if (hit.transform != null && hit.transform.parent.GetComponent<MapSlotItem>() != null)
+            if (hit.transform != null && hit.transform.GetComponent<MapSlotItem>() != null)
             {
-                MapSlotItem itemSlot = hit.transform.parent.GetComponent<MapSlotItem>();
-
+                MapSlotItem itemSlot = hit.transform.GetComponent<MapSlotItem>();
+                Debug.Log("StartLinkSlot");
                 linkStartSlot = new Vector2Int(itemSlot.FacilityKeyID, itemSlot.slotID);
                 linkStartSlotType = itemSlot.slotType;
                 isLinkingSlot = true;
@@ -202,9 +202,9 @@ public class InputMgr : MonoSingleton<InputMgr>
                 bool haveSetLink = false;
                 //检查是否落到了孔
                 RaycastHit2D hitSlot = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapSlot"));
-                if (!haveSetLink && hitSlot.transform != null && hitSlot.transform.parent.GetComponent<MapSlotItem>() != null)
+                if (!haveSetLink && hitSlot.transform != null && hitSlot.transform.GetComponent<MapSlotItem>() != null)
                 {
-                    MapSlotItem itemSlot = hitSlot.transform.parent.GetComponent<MapSlotItem>();
+                    MapSlotItem itemSlot = hitSlot.transform.GetComponent<MapSlotItem>();
 
                     //检查是否为同一个设施
                     if(linkStartSlot.x == itemSlot.FacilityKeyID)
