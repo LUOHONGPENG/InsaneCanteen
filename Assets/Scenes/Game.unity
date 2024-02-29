@@ -349,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIMgr
       objectReference: {fileID: 0}
+    - target: {fileID: 4616064453453248851, guid: 8ac04116c8239df4abc57e654ba03da5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -454.99994
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ac04116c8239df4abc57e654ba03da5, type: 3}
 --- !u!114 &368606397 stripped
@@ -450,7 +454,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 87
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -527,7 +531,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

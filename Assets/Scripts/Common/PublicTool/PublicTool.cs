@@ -62,7 +62,7 @@ public partial class PublicTool
 
     #region ForThisProject
     /// <summary>
-    /// 计算家具的占据范围
+    /// 计算设施的占据范围
     /// </summary>
     /// <param name="posID"></param>
     /// <param name="sizeX"></param>
@@ -81,6 +81,12 @@ public partial class PublicTool
         return tempPos;
     }
 
+    /// <summary>
+    /// 物体占据格最左下角以及物体中心的偏差距离（拖拽时鼠标中心会和物体中心一致）
+    /// </summary>
+    /// <param name="sizeX"></param>
+    /// <param name="sizeY"></param>
+    /// <returns></returns>
     public static Vector3 CalculateFacilityModelDelta(int sizeX,int sizeY)
     {
         return new Vector3(0.5f * GameGlobal.mapTileSize * (sizeX-1), 

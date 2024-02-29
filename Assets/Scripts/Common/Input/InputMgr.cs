@@ -10,6 +10,7 @@ public class InputMgr : MonoSingleton<InputMgr>
     private PlayerInput playerInput;
     private InputAction touchAction;
     private InputAction touchPositionAction;
+    private InputAction deleteAction;
     private bool isInitInput = false;
 
     #region Init
@@ -27,6 +28,7 @@ public class InputMgr : MonoSingleton<InputMgr>
             playerInput = new PlayerInput();
             touchAction = playerInput.Gameplay.Touch;
             touchPositionAction = playerInput.Gameplay.TouchPosition;
+            deleteAction = playerInput.Gameplay.Delete;
             isInitInput = true;
         }
     }
@@ -41,6 +43,7 @@ public class InputMgr : MonoSingleton<InputMgr>
         playerInput.Enable();
         touchAction.performed += Touch_performed;
         touchAction.canceled += Touch_canceled;
+        deleteAction.performed += Delete_performed;
     }
 
 
@@ -49,12 +52,15 @@ public class InputMgr : MonoSingleton<InputMgr>
     {
         touchAction.performed -= Touch_performed;
         touchAction.canceled -= Touch_canceled;
+        deleteAction.performed -= Delete_performed;
 
-        if(playerInput != null)
+        if (playerInput != null)
         {
             playerInput.Disable();
         }
     }
+
+
 
     private void OnEnable()
     {
@@ -79,6 +85,12 @@ public class InputMgr : MonoSingleton<InputMgr>
     {
         InvokeDrop();
     }
+
+    private void Delete_performed(InputAction.CallbackContext context)
+    {
+        InvokeDelete();
+    }
+
     public Vector3 GetMousePos()
     {
         if (PublicTool.GetSceneGameMgr().mapCamera != null)
@@ -91,13 +103,22 @@ public class InputMgr : MonoSingleton<InputMgr>
         }
     }
 
+    private Ray GetMouseRay()
+    {
+        Vector2 screenPosition = touchPositionAction.ReadValue<Vector2>();
+        Ray ray = PublicTool.GetSceneGameMgr().mapCamera.ScreenPointToRay(screenPosition);
+        return ray;
+    }
+
     #endregion
 
     #region Drag
 
     private bool isDragging = false;
 
-    //按住鼠标时候触发 检测是否抓住东西
+    /// <summary>
+    /// 按住鼠标时候触发 检测是否抓住东西
+    /// </summary>
     private void InvokeCheckDrag()
     {
         //UI
@@ -117,6 +138,9 @@ public class InputMgr : MonoSingleton<InputMgr>
 
     }
 
+    /// <summary>
+    /// 释放鼠标时触发
+    /// </summary>
     private void InvokeDrop()
     {
         if (isDragging)
@@ -136,6 +160,29 @@ public class InputMgr : MonoSingleton<InputMgr>
             isDragging = false;
         }
     }
+
+    private void InvokeDelete()
+    {
+        if (isDragging)
+        {
+            //还在拖拽物体的时候就不要出现删除操作了罢
+            return;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapFacility"));
+        if (hit.transform == null)
+        {
+            return;
+        }
+
+        if (hit.transform.parent.GetComponent<MapFacilityItem>() != null)
+        {
+            Debug.Log("HitFacility");
+            //EventCenter.Instance.EventTrigger("DeleteFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
+        }
+
+    }
+
 
     #endregion
 

@@ -44,6 +44,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""6989d19d-e134-4e8e-bf17-0f4996eb2202"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""TouchPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86628048-4053-40ca-8934-b473decf2976"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Touch = m_Gameplay.FindAction("Touch", throwIfNotFound: true);
         m_Gameplay_TouchPosition = m_Gameplay.FindAction("TouchPosition", throwIfNotFound: true);
+        m_Gameplay_Delete = m_Gameplay.FindAction("Delete", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,12 +160,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Touch;
     private readonly InputAction m_Gameplay_TouchPosition;
+    private readonly InputAction m_Gameplay_Delete;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
         public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Touch => m_Wrapper.m_Gameplay_Touch;
         public InputAction @TouchPosition => m_Wrapper.m_Gameplay_TouchPosition;
+        public InputAction @Delete => m_Wrapper.m_Gameplay_Delete;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -160,6 +183,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @TouchPosition.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTouchPosition;
                 @TouchPosition.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTouchPosition;
                 @TouchPosition.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTouchPosition;
+                @Delete.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDelete;
+                @Delete.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDelete;
+                @Delete.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDelete;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -170,6 +196,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @TouchPosition.started += instance.OnTouchPosition;
                 @TouchPosition.performed += instance.OnTouchPosition;
                 @TouchPosition.canceled += instance.OnTouchPosition;
+                @Delete.started += instance.OnDelete;
+                @Delete.performed += instance.OnDelete;
+                @Delete.canceled += instance.OnDelete;
             }
         }
     }
@@ -178,5 +207,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnTouch(InputAction.CallbackContext context);
         void OnTouchPosition(InputAction.CallbackContext context);
+        void OnDelete(InputAction.CallbackContext context);
     }
 }
