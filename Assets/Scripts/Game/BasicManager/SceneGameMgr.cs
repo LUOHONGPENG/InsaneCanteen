@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SceneGameMgr : MonoBehaviour
 {
+    public MapMgr mapMgr;
     public UIMgr uiMgr;
     public SceneGameData sceneGameData;
     private bool isInit = false;
