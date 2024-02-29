@@ -26,9 +26,6 @@ public partial class SceneGameData
     /// </summary>
     public FacilitySetData AddFacility(int typeID, Vector2Int posID)
     {
-        //检查是否位置被占了或者是否达到设施上限
-
-        //先假设位置合理
         facilityKeyID++;
         FacilitySetData newFacilityData = new FacilitySetData(facilityKeyID,typeID,posID);
         listFacility.Add(newFacilityData);

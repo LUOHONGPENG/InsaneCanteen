@@ -79,9 +79,16 @@ public class InputMgr : MonoSingleton<InputMgr>
     {
         InvokeDrop();
     }
-    private Vector2 GetMousePos()
+    public Vector2 GetMousePos()
     {
-        return PublicTool.GetSceneGameMgr().mapCamera.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+        if (PublicTool.GetSceneGameMgr().mapCamera != null)
+        {
+            return PublicTool.GetSceneGameMgr().mapCamera.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+        }
+        else
+        {
+            return Vector2.zero;
+        }
     }
 
     #endregion
@@ -101,7 +108,10 @@ public class InputMgr : MonoSingleton<InputMgr>
             if (CheckRayHoverUI())
             {
                 isDragging = true;
-                Debug.Log("StartDrag");
+                if (recordFacilityUIID > 0)
+                {
+                    EventCenter.Instance.EventTrigger("StartDragFacility", recordFacilityUIID);
+                }
             }
         }
 
@@ -111,8 +121,6 @@ public class InputMgr : MonoSingleton<InputMgr>
     {
         if (isDragging)
         {
-            isDragging = false;
-
             //从UI处拖拽出Facility的情况
             if(recordFacilityUIID > 0)
             {
@@ -120,7 +128,10 @@ public class InputMgr : MonoSingleton<InputMgr>
                 EventCenter.Instance.EventTrigger("SetFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
                 recordFacilityUIID = -1;
             }
-            Debug.Log("ReleaseDrag");
+
+            //不管是否有拖出Facility,都不影响发出该信号
+            EventCenter.Instance.EventTrigger("EndDragFacility", null);
+            isDragging = false;
         }
     }
 

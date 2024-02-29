@@ -16,6 +16,7 @@ public class FacilityButtonUIItem : MonoBehaviour
         {
             this.facilityExcelItem = PublicTool.GetFacilityItem(facilityID);
             imgFacility.sprite = Resources.Load("Sprite/Facility/" + facilityExcelItem.iconUrl, typeof(Sprite)) as Sprite;
+            imgFacility.SetNativeSize();
         }
     }
 

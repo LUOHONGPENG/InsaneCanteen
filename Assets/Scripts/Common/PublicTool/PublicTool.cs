@@ -53,6 +53,11 @@ public partial class PublicTool
     {
         return GetSceneGameMgr().sceneGameData;
     }
+
+    public static Vector2 GetMousePos()
+    {
+        return InputMgr.Instance.GetMousePos();
+    }
     #endregion
 
     #region ForThisProject

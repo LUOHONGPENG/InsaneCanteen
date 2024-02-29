@@ -52,9 +52,14 @@ public class SceneGameMgr : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 设置Facility的信号
+    /// </summary>
+    /// <param name="arg0"></param>
     private void SetFacilityEvent(object arg0)
     {
         SetFacilityInfo info = (SetFacilityInfo)arg0;
+        //检查目标位置这合理吗
         if(sceneGameData.CheckSetFaclityValid(info.typeID, info.posID))
         {
             //在数据层放置Facility
@@ -64,9 +69,16 @@ public class SceneGameMgr : MonoBehaviour
         }
         else
         {
+            //之后补反馈
             Debug.Log("Not Enough Space");
         }
     }
+
+    private void DeleteFacilityEvent(object arg0)
+    {
+
+    }
+
 
     #endregion
 }
