@@ -79,7 +79,7 @@ public class InputMgr : MonoSingleton<InputMgr>
     {
         InvokeDrop();
     }
-    public Vector2 GetMousePos()
+    public Vector3 GetMousePos()
     {
         if (PublicTool.GetSceneGameMgr().mapCamera != null)
         {
@@ -87,7 +87,7 @@ public class InputMgr : MonoSingleton<InputMgr>
         }
         else
         {
-            return Vector2.zero;
+            return Vector3.zero;
         }
     }
 
@@ -124,7 +124,9 @@ public class InputMgr : MonoSingleton<InputMgr>
             //从UI处拖拽出Facility的情况
             if(recordFacilityUIID > 0)
             {
-                Vector2Int tarPosID = PublicTool.ConvertPosToID(GetMousePos());
+                FacilityExcelItem excelItem = PublicTool.GetFacilityItem(recordFacilityUIID);
+                Vector3 realDropPos = GetMousePos() - PublicTool.CalculateFacilityModelDelta(excelItem.sizeX, excelItem.sizeY);
+                Vector2Int tarPosID = PublicTool.ConvertPosToID(realDropPos);
                 EventCenter.Instance.EventTrigger("SetFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
                 recordFacilityUIID = -1;
             }

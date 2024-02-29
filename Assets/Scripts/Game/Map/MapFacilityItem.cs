@@ -19,10 +19,9 @@ public class MapFacilityItem : MonoBehaviour
     public void SetSelfPos()
     {
         Vector3 basicPos = PublicTool.ConvertPosFromID(thisData.posID);
-        Vector3 sizeDelta = new Vector3(0.5f * GameGlobal.mapTileSize * (thisData.sizeX-1),
-            0.5f * GameGlobal.mapTileSize * (thisData.sizeY-1), 0);
+        Vector3 delta = PublicTool.CalculateFacilityModelDelta(thisData.sizeX, thisData.sizeY);
 
-        this.transform.localPosition = basicPos + sizeDelta;
+        this.transform.localPosition = basicPos + delta;
     }
 
 

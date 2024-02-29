@@ -81,6 +81,12 @@ public partial class PublicTool
         return tempPos;
     }
 
+    public static Vector3 CalculateFacilityModelDelta(int sizeX,int sizeY)
+    {
+        return new Vector3(0.5f * GameGlobal.mapTileSize * (sizeX-1), 
+            0.5f * GameGlobal.mapTileSize * (sizeY - 1), 0);
+    }
+
 
     #endregion
 
