@@ -4,24 +4,34 @@ using UnityEngine;
 
 public class MapFacilityItem : MonoBehaviour
 {
+    [Header("Basic")]
     public SpriteRenderer spFacility;
     //public BoxCollider2D boxCol;
     public PolygonCollider2D polyCol;
 
-    private FacilitySetData thisData;
+    [Header("Slot")]
+    public Transform tfSlotOut;
+    public GameObject pfSlotOut;
+    public Transform tfSlotIn;
+    public GameObject pfSlotIn;
 
+
+    private FacilitySetData thisData;
 
     public void Init(FacilitySetData facilityData)
     {
         thisData = facilityData;
         //SetSprite
+        //设置图片
         spFacility.sprite = Resources.Load("Sprite/Facility/" + thisData.GetExcelItem().iconUrl, typeof(Sprite)) as Sprite;
         //SetCollider
+        //设置碰撞体
         if (polyCol != null)
         {
             Destroy(polyCol);
         }
         polyCol = spFacility.gameObject.AddComponent<PolygonCollider2D>();
+        //设置位置
         SetSelfPos();
     }
 

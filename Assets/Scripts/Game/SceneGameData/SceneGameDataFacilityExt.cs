@@ -145,7 +145,44 @@ public class FacilitySetData
     //坐标值ID，以左下角的砖块为准
     //Position ID
     public Vector2Int posID = new Vector2Int(-1, -1);
+    //用来装Slot数据的List,Vector2Int = (keyID,slotID)
+    //(-1,-1)则表示为空
+    public List<Vector2Int> listSlotOut = new List<Vector2Int>();
+    public List<Vector2Int> listSlotIn = new List<Vector2Int>();
 
+    /// <summary>
+    /// 获取设施Excel数据
+    /// </summary>
+    /// <returns></returns>
+    public FacilityExcelItem GetExcelItem()
+    {
+        return PublicTool.GetFacilityItem(typeID);
+    }
+
+    public FacilitySetData(int keyID, int typeID, Vector2Int posID)
+    {
+        //基本信息初始化
+        this.keyID = keyID;
+        this.typeID = typeID;
+        this.posID = posID;
+        //Slot信息初始化
+        FacilityExcelItem excelItem = GetExcelItem();
+        if (excelItem != null)
+        {
+            listSlotOut.Clear();
+            for(int i = 0; i < excelItem.outSlot; i++)
+            {
+                listSlotOut.Add(new Vector2Int(-1, -1));
+            }
+            listSlotIn.Clear();
+            for (int i = 0; i < excelItem.inSlot; i++)
+            {
+                listSlotIn.Add(new Vector2Int(-1, -1));
+            }
+        }
+    }
+
+    #region Occupy占用空间
     /// <summary>
     /// 横向占据格数
     /// </summary>
@@ -182,23 +219,50 @@ public class FacilitySetData
         }
     }
 
-    public FacilitySetData(int keyID, int typeID, Vector2Int posID)
-    {
-        this.keyID = keyID;
-        this.typeID = typeID;
-        this.posID = posID;
-    }
-
     //获得这个Facility占据的格子PosID，比如2X2则会返回四个坐标
     public List<Vector2Int> GetOccupyPosID()
     {
         return PublicTool.CalculateFacilityOccupy(posID,sizeX,sizeY);
     }
+    #endregion
 
-    public FacilityExcelItem GetExcelItem()
+    #region Slot连接孔
+    //连接，该Facility向外的孔
+    public void JoinSlotOut(int thisSlotID, int otherKeyID, int otherSlotID)
     {
-        return PublicTool.GetFacilityItem(typeID);
+        if(thisSlotID < listSlotOut.Count)
+        {
+            listSlotOut[thisSlotID] = new Vector2Int(otherKeyID, otherSlotID);
+        }
     }
+
+    //解绑，该Facility向外的孔
+    public void DisjoinSlotOut(int thisSlotID)
+    {
+        if (thisSlotID < listSlotOut.Count)
+        {
+            listSlotOut[thisSlotID] = new Vector2Int(-1, -1);
+        }
+    }
+
+    //连接，该Facility进入的孔
+    public void JoinSlotIn(int thisSlotID, int otherKeyID, int otherSlotID)
+    {
+        if (thisSlotID < listSlotIn.Count)
+        {
+            listSlotIn[thisSlotID] = new Vector2Int(otherKeyID, otherSlotID);
+        }
+    }
+
+    //解绑，该Facility进入的孔
+    public void DisjoinSlotIn(int thisSlotID)
+    {
+        if (thisSlotID < listSlotIn.Count)
+        {
+            listSlotIn[thisSlotID] = new Vector2Int(-1, -1);
+        }
+    }
+    #endregion
 }
 
 #endregion
