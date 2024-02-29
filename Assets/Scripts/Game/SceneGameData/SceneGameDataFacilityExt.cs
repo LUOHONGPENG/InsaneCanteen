@@ -16,6 +16,8 @@ public partial class SceneGameData
     {
         listFacility.Clear();
         dicFacility.Clear();
+
+        AddFacility(3001, new Vector2Int(10, 10));
     }
 
     /// <summary>

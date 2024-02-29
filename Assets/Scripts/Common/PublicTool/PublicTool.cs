@@ -49,6 +49,11 @@ public partial class PublicTool
         return GameMgr.Instance.curSceneGameMgr;
     }
 
+    public static SceneGameData GetSceneGameData()
+    {
+        return GetSceneGameMgr().sceneGameData;
+    }
+
     #endregion
 
 
