@@ -17,6 +17,7 @@ public class GameMgr : MonoSingleton<GameMgr>
     public IEnumerator IE_InitGame()
     {
         yield return StartCoroutine(ExcelDataMgr.Instance.IE_Init());
+        yield return StartCoroutine(InputMgr.Instance.IE_Init());
 
         LoadScene(SceneName.Game);
 

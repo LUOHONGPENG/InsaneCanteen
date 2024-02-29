@@ -9,6 +9,7 @@ public class FacilityButtonUIItem : MonoBehaviour
 
     private FacilityExcelItem facilityExcelItem;
 
+
     public void Init(int facilityID)
     {
         if (PublicTool.GetFacilityItem(facilityID) != null)
@@ -17,4 +18,15 @@ public class FacilityButtonUIItem : MonoBehaviour
             imgFacility.sprite = Resources.Load("Sprite/Facility/" + facilityExcelItem.iconUrl, typeof(Sprite)) as Sprite;
         }
     }
+
+    //获取该按钮设施的typeID
+    public int GetFacilityID()
+    {
+        if (facilityExcelItem != null)
+        {
+            return facilityExcelItem.id;
+        }
+        return -1;
+    }
+
 }

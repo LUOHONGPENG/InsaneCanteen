@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 375066936535095739}
   m_Layer: 5
   m_Name: FacilityButtonUIItem
-  m_TagString: Untagged
+  m_TagString: FacilityButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

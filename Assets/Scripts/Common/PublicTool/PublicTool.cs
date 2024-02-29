@@ -42,6 +42,14 @@ public partial class PublicTool
         return new Vector2Int(posIDX, posIDY);
     }
 
+    #region ForThisProject
+
+    public static SceneGameMgr GetSceneGameMgr()
+    {
+        return GameMgr.Instance.curSceneGameMgr;
+    }
+
+    #endregion
 
 
     #region Excel
