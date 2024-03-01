@@ -38,6 +38,7 @@ public partial class SceneGameData
             listFacility[i].ClearFood();
             listFacility[i].EndDeliverRequest();
         }
+        ClearFood();
     }
 
     #region Basic Facility Function ÔöÉ¾²é

@@ -14,13 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - id: 1
-    readyFacility: e9030000d1070000
-    needFoodType: 2001
+    readyFacility: e9030000
+    needFoodType: 1001
     needFoodNum: 2
-    remark: "2\u4E2A\u841D\u535C\u7CA5"
+    remark: "2\u4E2A\u841D\u535C"
   - id: 2
     readyFacility: e9030000d1070000
     needFoodType: 2001
     needFoodNum: 4
-    remark: "4\u4E2A\u841D\u535C\u7CA5"
+    remark: "3\u4E2A\u841D\u535C\u7CA5"
+  - id: 3
+    readyFacility: ea030000d1070000
+    needFoodType: 2002
+    needFoodNum: 3
+    remark: "3\u4E2A\u874C\u86AA\u836F\u5242"
+  - id: 4
+    readyFacility: e9030000ea030000d1070000
+    needFoodType: 3012
+    needFoodNum: 3
+    remark: "3\u4E2A\u841D\u535C\u874C\u86AA\u6C64"
+  - id: 5
+    readyFacility: ea030000d1070000d2070000
+    needFoodType: 2003
+    needFoodNum: 3
+    remark: "3\u4E2A\u9C7C\u6C64"
+  - id: 6
+    readyFacility: e9030000ea030000d1070000d2070000
+    needFoodType: 4123
+    needFoodNum: 3
+    remark: "3\u4E2A\u841D\u535C\u874C\u86AA\u9C7C\u6C64"
   maxLevel: 0

@@ -22,8 +22,8 @@ MonoBehaviour:
     inSlot: 0
     type: 0
   - id: 1002
-    name: "\u9752\u86D9\u5375\u6C60"
-    iconUrl: 
+    name: "\u6C60\u5858"
+    iconUrl: imgFacility_pool
     sourceFoodID: 1002
     sizeX: 2
     sizeY: 2
@@ -36,6 +36,14 @@ MonoBehaviour:
     sizeX: 2
     sizeY: 2
     inSlot: 3
+    type: 1
+  - id: 2002
+    name: "\u6838\u5E9F\u6C34"
+    iconUrl: imgFacility_nucleus
+    sourceFoodID: -1
+    sizeX: 2
+    sizeY: 2
+    inSlot: 1
     type: 1
   - id: 3001
     name: "\u76D8\u5B50"

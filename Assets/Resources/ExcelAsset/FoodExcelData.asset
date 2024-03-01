@@ -18,16 +18,25 @@ MonoBehaviour:
     iconUrl: imgFood_carrot
   - id: 1002
     name: "\u874C\u86AA"
-    iconUrl: 
+    iconUrl: imgFood_tadpold
+  - id: 1003
+    name: "\u9C7C"
+    iconUrl: imgFood_fish
   - id: 2001
-    name: "\u841D\u535C\u7CA5"
-    iconUrl: imgFood_carrotCongee
+    name: "\u841D\u535C\u6C64"
+    iconUrl: imgFood_carrotSoup
   - id: 2002
-    name: "\u874C\u86AA\u7CA5"
-    iconUrl: 
+    name: "\u874C\u86AA\u836F\u5242"
+    iconUrl: imgFood_tadpoldPotion
   - id: 2003
-    name: "\u841D\u535C\u874C\u86AA\u7CA5"
-    iconUrl: 
+    name: "\u9C7C\u6C64"
+    iconUrl: imgFood_fishSoup
+  - id: 3012
+    name: "\u841D\u535C\u874C\u86AA\u6C64"
+    iconUrl: imgFood_carrotTadpoldSoup
+  - id: 4123
+    name: "\u841D\u535C\u874C\u86AA\u9C7C\u6C64"
+    iconUrl: imgFood_carrotTadpoldFishSoup
   - id: 9999
     name: "\u7126\u70AD"
-    iconUrl: 
+    iconUrl: imgFood_shit
