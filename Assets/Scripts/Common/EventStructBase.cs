@@ -55,12 +55,38 @@ public class FacilityDeliverRequest
     public int foodTypeID;
     public int tarFacilityKeyID;
     public int tarFacilitySlotID;
+    public float deliverTime = 0;
 
     public FacilityDeliverRequest(int foodTypeID,int tarFacilityKeyID,int tarFacilitySlotID)
     {
         this.foodTypeID = foodTypeID;
         this.tarFacilityKeyID = tarFacilityKeyID;
         this.tarFacilitySlotID = tarFacilitySlotID;
+        deliverTime = GameGlobal.deliverTime;
+    }
+
+    /// <summary>
+    /// 每次检查时候时间流逝检查间隔
+    /// </summary>
+    public void DeliverTimeGo()
+    {
+        deliverTime -= GameGlobal.cookCheckTime;
+    }
+
+    /// <summary>
+    /// 检查是否完成
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckDeliver()
+    {
+        if (deliverTime < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

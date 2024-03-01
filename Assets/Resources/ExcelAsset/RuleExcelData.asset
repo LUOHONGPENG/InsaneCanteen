@@ -16,18 +16,21 @@ MonoBehaviour:
   - id: 1
     resultID: 2001
     name: "\u841D\u535C\u7CA5"
+    mixerID: 2001
     priority: 0
     array_foodID: e9030000
     array_foodNum: 01000000
   - id: 2
     resultID: 2002
     name: "\u874C\u86AA\u7CA5"
+    mixerID: 2001
     priority: 0
     array_foodID: ea030000
     array_foodNum: 01000000
   - id: 3
     resultID: 2003
     name: "\u841D\u535C\u874C\u86AA\u7CA5"
+    mixerID: 2001
     priority: 1
     array_foodID: e9030000ea030000
     array_foodNum: 0100000001000000

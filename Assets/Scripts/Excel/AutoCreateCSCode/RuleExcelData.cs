@@ -10,6 +10,7 @@ public partial class RuleExcelItem : ExcelItemBase
 {
 	public int resultID;
 	public string name;
+	public int mixerID;
 	public int priority;
 	public List<int> array_foodID;
 	public List<int> array_foodNum;
@@ -35,6 +36,7 @@ public class RuleAssetAssignment
 			items[i].id = Convert.ToInt32(allItemValueRowList[i]["id"]);
 			items[i].resultID = Convert.ToInt32(allItemValueRowList[i]["resultID"]);
 			items[i].name = allItemValueRowList[i]["name"];
+			items[i].mixerID = Convert.ToInt32(allItemValueRowList[i]["mixerID"]);
 			items[i].priority = Convert.ToInt32(allItemValueRowList[i]["priority"]);
 			items[i].array_foodID = new List<int>(Array.ConvertAll((allItemValueRowList[i]["array_foodID"]).Split(';'), int.Parse));
 			items[i].array_foodNum = new List<int>(Array.ConvertAll((allItemValueRowList[i]["array_foodNum"]).Split(';'), int.Parse));

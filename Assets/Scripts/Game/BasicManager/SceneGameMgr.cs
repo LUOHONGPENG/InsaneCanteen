@@ -56,7 +56,12 @@ public partial class SceneGameMgr : MonoBehaviour
         EventCenter.Instance.AddEventListener("DeleteFacility", DeleteFacilityEvent);
         EventCenter.Instance.AddEventListener("SetLink", SetLinkEvent);
         EventCenter.Instance.AddEventListener("DeleteLink", DeleteLinkEvent);
+
+        //模式相关
+        EventCenter.Instance.AddEventListener("BuildState", StopCook);
+        EventCenter.Instance.AddEventListener("CookState", StartCook);
     }
+
 
 
     public void OnDestroy()
@@ -66,7 +71,9 @@ public partial class SceneGameMgr : MonoBehaviour
         EventCenter.Instance.RemoveEventListener("DeleteFacility", DeleteFacilityEvent);
         EventCenter.Instance.RemoveEventListener("SetLink", SetLinkEvent);
         EventCenter.Instance.RemoveEventListener("DeleteLink", DeleteLinkEvent);
-
+        //模式相关
+        EventCenter.Instance.RemoveEventListener("BuildState", StopCook);
+        EventCenter.Instance.RemoveEventListener("CookState", StartCook);
     }
 
 

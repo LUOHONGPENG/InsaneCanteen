@@ -35,6 +35,19 @@ public partial class SceneGameData
         dicCurFood.Clear();
     }
 
+    public void EatFood(int foodID)
+    {
+        if (dicCurFood.ContainsKey(foodID))
+        {
+            dicCurFood[foodID]++;
+        }
+        else
+        {
+            dicCurFood.Add(foodID, 1);
+        }
+    }
+
+
     /// <summary>
     /// 检查当前菜品是否满足过关条件
     /// </summary>

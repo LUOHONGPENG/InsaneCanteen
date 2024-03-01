@@ -206,6 +206,8 @@ public partial class FacilitySetData
         {
             //»˚»Î ≥ŒÔ
             listSlotStore[slotID].Enqueue(typeID);
+
+            Debug.Log("AddFood " + slotID + " " + typeID);
         }
     }
 

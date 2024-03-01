@@ -23,3 +23,4 @@ MonoBehaviour:
     needFoodType: 2001
     needFoodNum: 4
     remark: "4\u4E2A\u841D\u535C\u7CA5"
+  maxLevel: 0

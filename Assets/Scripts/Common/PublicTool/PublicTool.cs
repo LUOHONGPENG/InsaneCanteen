@@ -98,6 +98,13 @@ public partial class PublicTool
 
     #region Excel
     //快速获取表格数据
+
+    public static int SearchBlendResult(List<Vector2Int> existFood, int mixerID)
+    {
+        return ExcelDataMgr.Instance.ruleExcelData.SearchBlendResult(existFood,mixerID);
+    }
+
+
     public static FacilityExcelItem GetFacilityItem(int facilityID)
     {
         return ExcelDataMgr.Instance.facilityExcelData.GetExcelItem(facilityID);

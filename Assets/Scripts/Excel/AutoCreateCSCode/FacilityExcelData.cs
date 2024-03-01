@@ -10,6 +10,7 @@ public partial class FacilityExcelItem : ExcelItemBase
 {
 	public string name;
 	public string iconUrl;
+	public int sourceFoodID;
 	public int sizeX;
 	public int sizeY;
 	public int inSlot;
@@ -36,6 +37,7 @@ public class FacilityAssetAssignment
 			items[i].id = Convert.ToInt32(allItemValueRowList[i]["id"]);
 			items[i].name = allItemValueRowList[i]["name"];
 			items[i].iconUrl = allItemValueRowList[i]["iconUrl"];
+			items[i].sourceFoodID = Convert.ToInt32(allItemValueRowList[i]["sourceFoodID"]);
 			items[i].sizeX = Convert.ToInt32(allItemValueRowList[i]["sizeX"]);
 			items[i].sizeY = Convert.ToInt32(allItemValueRowList[i]["sizeY"]);
 			items[i].inSlot = Convert.ToInt32(allItemValueRowList[i]["inSlot"]);

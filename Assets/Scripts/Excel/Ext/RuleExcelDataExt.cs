@@ -5,12 +5,10 @@ using UnityEngine;
 
 public partial class RuleExcelData
 {
-    public List<RuleContainer> listRule = new List<RuleContainer>();
+    public Dictionary<int, List<RuleContainer>> dicMixerRule = new Dictionary<int, List<RuleContainer>>();
 
     public void Init()
     {
-        listRule.Clear();
-
         List<RuleExcelItem> ruleItems = new List<RuleExcelItem>(items);
         //排序
         RuleSortHighestPriority(ruleItems);
@@ -23,7 +21,17 @@ public partial class RuleExcelData
             if(tempItem.array_foodID.Count > 0 && tempItem.array_foodNum.Count > 0 && tempItem.array_foodID.Count == tempItem.array_foodNum.Count)
             {
                 RuleContainer rule = new RuleContainer(tempItem.array_foodID, tempItem.array_foodNum,tempItem.resultID);
-                listRule.Add(rule);
+
+                if (dicMixerRule.ContainsKey(tempItem.mixerID))
+                {
+                    dicMixerRule[tempItem.mixerID].Add(rule);
+                }
+                else
+                {
+                    List<RuleContainer> listRule = new List<RuleContainer>();
+                    listRule.Add(rule);
+                    dicMixerRule.Add(tempItem.mixerID, listRule);
+                }
             }
         }
     }
@@ -35,14 +43,18 @@ public partial class RuleExcelData
     }
 
     //遍历搜索混合结果
-    public int SearchBlendResult(List<Vector2Int> existFood)
+    public int SearchBlendResult(List<Vector2Int> existFood,int mixerID)
     {
-        for(int i = 0;i < listRule.Count; i++)
+        if (dicMixerRule.ContainsKey(mixerID))
         {
-            RuleContainer tempRule = listRule[i];
-            if (tempRule.CheckMatchThisRule(existFood))
+            List<RuleContainer> listRule = dicMixerRule[mixerID];
+            for (int i = 0; i < listRule.Count; i++)
             {
-                return tempRule.resultID;
+                RuleContainer tempRule = listRule[i];
+                if (tempRule.CheckMatchThisRule(existFood))
+                {
+                    return tempRule.resultID;
+                }
             }
         }
         return -1;

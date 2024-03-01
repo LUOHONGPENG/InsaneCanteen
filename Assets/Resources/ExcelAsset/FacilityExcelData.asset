@@ -16,6 +16,7 @@ MonoBehaviour:
   - id: 1001
     name: "\u841D\u535C\u7530"
     iconUrl: imgFacility_carrotFarm
+    sourceFoodID: 1001
     sizeX: 2
     sizeY: 2
     inSlot: 0
@@ -23,6 +24,7 @@ MonoBehaviour:
   - id: 1002
     name: "\u9752\u86D9\u5375\u6C60"
     iconUrl: 
+    sourceFoodID: 1002
     sizeX: 2
     sizeY: 2
     inSlot: 0
@@ -30,6 +32,7 @@ MonoBehaviour:
   - id: 2001
     name: "\u9505"
     iconUrl: imgFacility_pot
+    sourceFoodID: -1
     sizeX: 2
     sizeY: 2
     inSlot: 3
@@ -37,6 +40,7 @@ MonoBehaviour:
   - id: 3001
     name: "\u76D8\u5B50"
     iconUrl: imgFacility_plate
+    sourceFoodID: -1
     sizeX: 2
     sizeY: 1
     inSlot: 1

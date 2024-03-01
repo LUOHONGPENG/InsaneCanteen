@@ -16,6 +16,7 @@ public class ModeUIMgr : MonoBehaviour
         btnBuild.onClick.AddListener(delegate ()
         {
             InputMgr.Instance.SetState(InputState.Build);
+            EventCenter.Instance.EventTrigger("BuildState",null);
             UpdateStateText();
         });
 
@@ -23,6 +24,7 @@ public class ModeUIMgr : MonoBehaviour
         btnCook.onClick.AddListener(delegate ()
         {
             InputMgr.Instance.SetState(InputState.Cook);
+            EventCenter.Instance.EventTrigger("CookState", null);
             UpdateStateText();
         });
 
