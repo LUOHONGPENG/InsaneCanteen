@@ -61,5 +61,8 @@ public class MapLineItem : MonoBehaviour
             angle = -angle;
         }
         spLine.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+
+
     }
 }

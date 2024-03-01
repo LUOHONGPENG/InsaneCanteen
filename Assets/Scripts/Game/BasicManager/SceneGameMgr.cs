@@ -144,7 +144,7 @@ public class SceneGameMgr : MonoBehaviour
         FacilitySetData tarDataOut = sceneGameData.GetFacility(info.outKeyID);
         tarDataOut.DisjoinSlotOut(info.outSlotID);
         FacilitySetData tarDataIn = sceneGameData.GetFacility(info.inKeyID);
-        tarDataOut.DisjoinSlotIn(info.inSlotID);
+        tarDataIn.DisjoinSlotIn(info.inSlotID);
         //╠Мож╡Ц
         mapMgr.UpdateLine();
     }

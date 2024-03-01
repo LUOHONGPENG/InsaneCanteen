@@ -11,8 +11,23 @@ public class InputMgr : MonoSingleton<InputMgr>
     private InputAction touchAction;
     private InputAction touchPositionAction;
     private InputAction deleteAction;
-    public InputState inputState = InputState.Build;
     private bool isInitInput = false;
+
+    #region State
+    private InputState inputState = InputState.Build;
+
+    public void SetState(InputState state)
+    {
+        inputState = state;
+    }
+
+    public InputState GetState()
+    {
+        return inputState;
+    }
+
+    #endregion
+
 
     #region Init
 
@@ -93,6 +108,7 @@ public class InputMgr : MonoSingleton<InputMgr>
         }
     }
 
+    //右键点击触发
     private void Delete_performed(InputAction.CallbackContext context)
     {
         if (inputState == InputState.Build)
@@ -198,11 +214,10 @@ public class InputMgr : MonoSingleton<InputMgr>
             if(hit.transform.GetComponent<MapSlotItem>() != null)
             {
                 MapSlotItem itemSlot = hit.transform.GetComponent<MapSlotItem>();
-                Debug.Log("StartLinkSlot");
                 linkStartSlot = new Vector2Int(itemSlot.FacilityKeyID, itemSlot.slotID);
                 linkStartSlotType = itemSlot.slotType;
                 isLinkingSlot = true;
-                EventCenter.Instance.EventTrigger("StartLinkSlot", linkStartSlot);
+                EventCenter.Instance.EventTrigger("StartLinkSlot", itemSlot.transform.position);
             }
             return true;
         }
@@ -352,6 +367,10 @@ public class InputMgr : MonoSingleton<InputMgr>
         return false;
     }
 
+    /// <summary>
+    /// 检查是否删掉了线
+    /// </summary>
+    /// <returns></returns>
     private bool CheckDeleteLine()
     {
         RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapLine"));

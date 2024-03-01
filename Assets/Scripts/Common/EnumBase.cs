@@ -10,7 +10,7 @@ public enum SceneName
 public enum InputState
 {
     Build,
-    Play
+    Cook
 }
 
 public enum FacilityType
