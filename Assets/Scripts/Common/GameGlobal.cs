@@ -17,7 +17,7 @@ public static class GameGlobal
     public static float mapSlotSpacingY = 0.3f;
     //Cook
     public static float deliverTime = 1f;
-    public static float cookCheckTime = 0.2f;
+    public static float cookCheckTime = 0.1f;
     #endregion
 
 }

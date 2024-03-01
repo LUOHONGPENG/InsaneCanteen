@@ -9,6 +9,7 @@ public class UIMgr : MonoBehaviour
     public FacilityButtonUIMgr facilityButtonUIMgr;
     public FacilityPreviewUIMgr facilityPreviewUIMgr;
     public LinePreviewUIMgr linePreviewUIMgr;
+    public LevelClearUIMgr levelClearUIMgr;
 
     private bool isInit = false;
     public void Init()
@@ -18,6 +19,7 @@ public class UIMgr : MonoBehaviour
         facilityButtonUIMgr.Init();
         facilityPreviewUIMgr.Init();
         linePreviewUIMgr.Init();
+        levelClearUIMgr.Init();
         isInit = true;
     }
 

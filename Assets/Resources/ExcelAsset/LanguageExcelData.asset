@@ -23,14 +23,23 @@ MonoBehaviour:
     key: tx_ui_order
     descCN: "\u8BA2\u5355"
   - id: 4
+    key: tx_ui_orderFinish
+    descCN: "\u8BA2\u5355\u5B8C\u6210"
+  - id: 5
+    key: tx_ui_levelClear
+    descCN: "\u611F\u8C22\u6E38\u73A9"
+  - id: 6
+    key: tx_ui_nextLevel
+    descCN: "\u4E0B\u4E00\u5173"
+  - id: 7
     key: tx_state_build
     descCN: "\u5EFA\u9020\u6A21\u5F0F"
-  - id: 5
+  - id: 8
     key: tx_state_buildTip
     descCN: "\u5DE6\u952E\u4ECE\u53F3\u8FB9UI\u62D6\u62FD\u8BBE\u65BD\u5E76\u8FDE\u7EBF\n\n\u53F3\u952E\u5220\u9664\u8BBE\u65BD\u6216\u8FDE\u7EBF"
-  - id: 6
+  - id: 9
     key: tx_state_cook
     descCN: "\u70F9\u996A\u6A21\u5F0F"
-  - id: 7
+  - id: 10
     key: tx_state_cookTip
     descCN: "\u70F9\u996A\u4E2D\uFF0C\u65E0\u6CD5\u62D6\u62FD\u6216\u5220\u9664"

@@ -42,14 +42,14 @@ public class LevelUIMgr : MonoBehaviour
         EventCenter.Instance.AddEventListener("UpdateFood", UpdateFoodEvent);
     }
 
-    private void UpdateFoodEvent(object arg0)
-    {
-        UpdateFood();
-    }
 
     public void OnDestroy()
     {
         EventCenter.Instance.RemoveEventListener("UpdateFood", UpdateFoodEvent);
+    }
+    private void UpdateFoodEvent(object arg0)
+    {
+        UpdateFood();
     }
 
     public void UpdateFood()

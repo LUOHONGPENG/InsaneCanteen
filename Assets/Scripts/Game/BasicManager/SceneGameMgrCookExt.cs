@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,16 +10,12 @@ public partial class SceneGameMgr
     /// <summary>
     /// 下一关
     /// </summary>
-    private void NextLevel()
+    private void NextLevelEvent(object arg0)
     {
         if (sceneGameData.curLevelID < PublicTool.GetMaxLevel())
         {
             sceneGameData.curLevelID++;
             NewLevel();
-        }
-        else
-        {
-            //GameEnd
         }
     }
 
@@ -252,7 +249,16 @@ public partial class SceneGameMgr
                     //刷新食物
                     if (sceneGameData.CheckWhetherMeetOrder())
                     {
-                        EventCenter.Instance.EventTrigger("NextLevelUI", null);
+                        //停止烹饪
+                        isCooking = false;
+                        if(sceneGameData.curLevelID < PublicTool.GetMaxLevel())
+                        {
+                            EventCenter.Instance.EventTrigger("NextLevelUI", false);
+                        }
+                        else
+                        {
+                            EventCenter.Instance.EventTrigger("NextLevelUI", true);
+                        }
                     }
                 }
             }

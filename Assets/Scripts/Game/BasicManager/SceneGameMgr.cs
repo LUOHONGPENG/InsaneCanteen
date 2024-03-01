@@ -60,6 +60,9 @@ public partial class SceneGameMgr : MonoBehaviour
         //模式相关
         EventCenter.Instance.AddEventListener("BuildState", StopCook);
         EventCenter.Instance.AddEventListener("CookState", StartCook);
+
+        EventCenter.Instance.AddEventListener("NextLevel", NextLevelEvent);
+
     }
 
 
@@ -74,7 +77,12 @@ public partial class SceneGameMgr : MonoBehaviour
         //模式相关
         EventCenter.Instance.RemoveEventListener("BuildState", StopCook);
         EventCenter.Instance.RemoveEventListener("CookState", StartCook);
+
+        EventCenter.Instance.RemoveEventListener("NextLevel", NextLevelEvent);
+
     }
+
+
 
 
     #endregion

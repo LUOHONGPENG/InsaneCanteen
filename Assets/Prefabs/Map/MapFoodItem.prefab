@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd37f87649a7f5e4484b0d5afc88dc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tfThis: {fileID: 0}
+  tfThis: {fileID: 3549624216013448976}
   spFood: {fileID: 691342327217122700}
 --- !u!1 &2712743340105360234
 GameObject:
