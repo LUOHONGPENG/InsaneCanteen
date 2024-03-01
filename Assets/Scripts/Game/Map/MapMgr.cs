@@ -14,6 +14,9 @@ public class MapMgr : MonoBehaviour
     [Header("Line")]
     public Transform tfLine;
     public GameObject pfLine;
+    [Header("Food")]
+    public Transform tfFood;
+    public GameObject pfFood;
 
     private SceneGameData sceneGameData;
 
@@ -24,6 +27,7 @@ public class MapMgr : MonoBehaviour
         InitMapBG();
         InitFacility();
         UpdateLine();
+        ClearFood();
     }
 
     /// <summary>
@@ -105,6 +109,30 @@ public class MapMgr : MonoBehaviour
                     }
                 }
             }
+        }
+
+    }
+    #endregion
+
+    #region 食物可视化相关
+
+    public void ClearFood()
+    {
+        PublicTool.ClearChildItem(tfFood);
+    }
+
+    public void CreateFood(int typeID, Vector2Int startSlot,Vector2Int endSlot)
+    {
+        if(dicFacility.ContainsKey(startSlot.x) && dicFacility.ContainsKey(endSlot.x))
+        {
+            GameObject objFood = GameObject.Instantiate(pfFood, tfFood);
+            MapFoodItem itemFood = objFood.GetComponent<MapFoodItem>();
+            itemFood.Init(typeID);
+
+            MapSlotItem startItem = dicFacility[startSlot.x].listSlotOut[startSlot.y];
+            MapSlotItem endItem = dicFacility[endSlot.x].listSlotIn[endSlot.y];
+
+            itemFood.InitAni(startItem.transform.position, endItem.transform.position);
         }
 
     }

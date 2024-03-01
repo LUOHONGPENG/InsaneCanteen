@@ -36,6 +36,7 @@ public partial class SceneGameMgr
         //重置地图
         mapMgr.InitFacility();
         mapMgr.UpdateLine();
+        mapMgr.ClearFood();
         //重置UI,主要是提供的设施会变
         uiMgr.NewLevelSetFacility(levelItem.readyFacility);
         uiMgr.NewLevelUpdateOrder();
@@ -63,9 +64,7 @@ public partial class SceneGameMgr
         //重置数据
         sceneGameData.StopCookFacility();
         //重置地图，主要是要把食物清除掉吧
-
-        //Map
-
+        mapMgr.ClearFood();
         //重置UI，主要是清除食物
         uiMgr.StopCookUpdateFood();
     }
@@ -123,7 +122,7 @@ public partial class SceneGameMgr
                 Vector2Int slotLink = facility.listSlotOut[0];
                 facility.CreateDeliverRequest(facility.GetExcelItem().sourceFoodID, slotLink.x, slotLink.y);
                 //表现层-创造出一个沿着line飞过去目标Slot的Dotween动画，维持1秒即可
-                //
+                mapMgr.CreateFood(facility.GetExcelItem().sourceFoodID, new Vector2Int(facility.keyID, 0), slotLink);
             }
         }
         else
@@ -212,7 +211,7 @@ public partial class SceneGameMgr
                     Vector2Int slotLink = facility.listSlotOut[0];
                     facility.CreateDeliverRequest(resultID, slotLink.x, slotLink.y);
                     //表现层-创造出一个沿着line飞过去目标Slot的Dotween动画，维持1秒即可
-                    //
+                    mapMgr.CreateFood(resultID, new Vector2Int(facility.keyID, 0), slotLink);
                 }
             }
         }

@@ -33,6 +33,7 @@ Transform:
   - {fileID: 5982675828628016124}
   - {fileID: 5244743346290434454}
   - {fileID: 3883955067979165704}
+  - {fileID: 91200358747531312}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,6 +55,8 @@ MonoBehaviour:
   pfFacility: {fileID: 4362807232959709096, guid: fc5b0088f5019e54e813ae906ead31ea, type: 3}
   tfLine: {fileID: 3883955067979165704}
   pfLine: {fileID: 2755865739526888940, guid: 08524aa7b1b39a44babc9a63e39ca435, type: 3}
+  tfFood: {fileID: 91200358747531312}
+  pfFood: {fileID: 1755590680504769477, guid: 6dd09ae3aad4c414d9c1c8d015f6645a, type: 3}
 --- !u!1 &3020153992731402848
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,4 +233,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 666795502475439769}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7669098530563392339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 91200358747531312}
+  m_Layer: 0
+  m_Name: tfFood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &91200358747531312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7669098530563392339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 666795502475439769}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
