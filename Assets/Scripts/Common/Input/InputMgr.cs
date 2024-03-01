@@ -11,6 +11,7 @@ public class InputMgr : MonoSingleton<InputMgr>
     private InputAction touchAction;
     private InputAction touchPositionAction;
     private InputAction deleteAction;
+    public InputState inputState = InputState.Build;
     private bool isInitInput = false;
 
     #region Init
@@ -77,18 +78,27 @@ public class InputMgr : MonoSingleton<InputMgr>
     //左键点击下去时候触发
     private void Touch_performed(InputAction.CallbackContext context)
     {
-        InvokeCheckDrag();
+        if(inputState == InputState.Build)
+        {
+            InvokeCheckDrag();
+        }
     }
 
     //左键点击松开时候触发
     private void Touch_canceled(InputAction.CallbackContext context)
     {
-        InvokeDrop();
+        if (inputState == InputState.Build)
+        {
+            InvokeDrop();
+        }
     }
 
     private void Delete_performed(InputAction.CallbackContext context)
     {
-        InvokeDelete();
+        if (inputState == InputState.Build)
+        {
+            InvokeDelete();
+        }
     }
 
     public Vector3 GetMousePos()
@@ -112,7 +122,7 @@ public class InputMgr : MonoSingleton<InputMgr>
 
     #endregion
 
-    #region Drag
+    #region CheckDrag
 
     /// <summary>
     /// 是否在拖拽设施中
@@ -145,21 +155,47 @@ public class InputMgr : MonoSingleton<InputMgr>
         if (!isDraggingFacility && !isLinkingSlot)
         {
             //检查是否开始拖拽点为设施UI
-            CheckGraphicRay();
-            if (CheckRayHoverFacilityButton())
+            if (CheckDragUIFacility())
             {
-                if (recordFacilityUIID > 0)
-                {
-                    //开始从UI拖拽设施
-                    isDraggingFacility = true;
-                    EventCenter.Instance.EventTrigger("StartDragFacility", recordFacilityUIID);
-                }
                 return;
             }
-
             //检查是否开始拖拽点为出孔
-            RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapSlot"));
-            if (hit.transform != null && hit.transform.GetComponent<MapSlotItem>() != null)
+            if (CheckDragSlot())
+            {
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 检查是否开始拖拽点为设施UI
+    /// </summary>
+    private bool CheckDragUIFacility()
+    {
+        CheckGraphicRay();
+        if (CheckRayHoverFacilityButton())
+        {
+            if (recordFacilityUIID > 0)
+            {
+                //开始从UI拖拽设施
+                isDraggingFacility = true;
+                EventCenter.Instance.EventTrigger("StartDragFacility", recordFacilityUIID);
+            }
+            //有碰到就应当为true
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    ///检查是否开始拖拽点为出孔
+    /// </summary>
+    private bool CheckDragSlot()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapSlot"));
+        if (hit.transform != null)
+        {
+            if(hit.transform.GetComponent<MapSlotItem>() != null)
             {
                 MapSlotItem itemSlot = hit.transform.GetComponent<MapSlotItem>();
                 Debug.Log("StartLinkSlot");
@@ -168,10 +204,14 @@ public class InputMgr : MonoSingleton<InputMgr>
                 isLinkingSlot = true;
                 EventCenter.Instance.EventTrigger("StartLinkSlot", linkStartSlot);
             }
+            return true;
         }
-
+        return false;
     }
 
+    #endregion
+
+    #region CheckDrop
     /// <summary>
     /// 释放鼠标时触发
     /// </summary>
@@ -180,14 +220,7 @@ public class InputMgr : MonoSingleton<InputMgr>
         if (isDraggingFacility)
         {
             //从UI处拖拽出Facility的情况
-            if(recordFacilityUIID > 0)
-            {
-                FacilityExcelItem excelItem = PublicTool.GetFacilityItem(recordFacilityUIID);
-                Vector3 realDropPos = GetMousePos() - PublicTool.CalculateFacilityModelDelta(excelItem.sizeX, excelItem.sizeY);
-                Vector2Int tarPosID = PublicTool.ConvertPosToID(realDropPos);
-                EventCenter.Instance.EventTrigger("SetFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
-                recordFacilityUIID = -1;
-            }
+            CheckDropUIFacility();
 
             //不管是否有拖出Facility,都不影响发出该信号
             EventCenter.Instance.EventTrigger("EndDragFacility", null);
@@ -197,63 +230,89 @@ public class InputMgr : MonoSingleton<InputMgr>
 
         if (isLinkingSlot)
         {
-            if (linkStartSlot.x >= 0)
-            {
-                bool haveSetLink = false;
-                //检查是否落到了孔
-                RaycastHit2D hitSlot = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapSlot"));
-                if (!haveSetLink && hitSlot.transform != null && hitSlot.transform.GetComponent<MapSlotItem>() != null)
-                {
-                    MapSlotItem itemSlot = hitSlot.transform.GetComponent<MapSlotItem>();
+            //连线时释放到Slot上的情况
+            CheckDropSlot();
 
-                    //检查是否为同一个设施
-                    if(linkStartSlot.x == itemSlot.FacilityKeyID)
-                    {
-                        Debug.Log("Can not link same facility");
-                    }
-                    //检查是否为同种类孔
-                    else if(itemSlot.slotType == linkStartSlotType)
-                    {
-                        Debug.Log("Can not link slots in the same type");
-                    }
-                    else
-                    {
-                        //检查是否该Slot已满
-                        SceneGameData sceneGameData = PublicTool.GetSceneGameData();
-                        if (sceneGameData.dicFacility.ContainsKey(itemSlot.FacilityKeyID))
-                        {
-                            FacilitySetData facilityData = sceneGameData.dicFacility[itemSlot.FacilityKeyID];
-                            //如果该Slot是空的
-                            if(itemSlot.slotType == SlotType.In && facilityData.listSlotIn.Count > itemSlot.slotID && facilityData.listSlotIn[itemSlot.slotID].x < 0)
-                            {
-                                //建立连接 Drop的点为入孔
-                                haveSetLink = true;
-                                EventCenter.Instance.EventTrigger("SetLink", new SetLinkInfo(linkStartSlot.x, linkStartSlot.y,itemSlot.FacilityKeyID,itemSlot.slotID));
-                            }
-                            else if(itemSlot.slotType == SlotType.Out && facilityData.listSlotOut.Count > itemSlot.slotID && facilityData.listSlotOut[itemSlot.slotID].x < 0)
-                            {
-                                //建立连接  Drop的点为出孔
-                                haveSetLink = true;
-                                EventCenter.Instance.EventTrigger("SetLink", new SetLinkInfo(itemSlot.FacilityKeyID, itemSlot.slotID,linkStartSlot.x, linkStartSlot.y));
-                            }
-                            else
-                            {
-                                Debug.Log("Invalid Slot");
-                            }
-                        }
-                    }
-                }
-            }
-
-            //不管是否有拖到终点Facility,都不影响发出该信号
+            //不管是否有拖到终点,都不影响发出该信号
             EventCenter.Instance.EventTrigger("EndLinkSlot", null);
             linkStartSlot = new Vector2Int(-1, -1);
             isLinkingSlot = false;
             return;
         }
-
-
     }
+
+    /// <summary>
+    /// 从UI处拖拽出Facility后释放的情况
+    /// </summary>
+    private void CheckDropUIFacility()
+    {
+        if (recordFacilityUIID > 0)
+        {
+            FacilityExcelItem excelItem = PublicTool.GetFacilityItem(recordFacilityUIID);
+            Vector3 realDropPos = GetMousePos() - PublicTool.CalculateFacilityModelDelta(excelItem.sizeX, excelItem.sizeY);
+            Vector2Int tarPosID = PublicTool.ConvertPosToID(realDropPos);
+            EventCenter.Instance.EventTrigger("SetFacility", new SetFacilityInfo(recordFacilityUIID, tarPosID));
+            recordFacilityUIID = -1;
+        }
+    }
+
+    /// <summary>
+    /// 连线时释放到Slot上的情况
+    /// </summary>
+    private void CheckDropSlot()
+    {
+        if (linkStartSlot.x >= 0)
+        {
+            bool haveSetLink = false;
+            //检查是否落到了孔
+            RaycastHit2D hitSlot = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapSlot"));
+            if (!haveSetLink && hitSlot.transform != null && hitSlot.transform.GetComponent<MapSlotItem>() != null)
+            {
+                MapSlotItem itemSlot = hitSlot.transform.GetComponent<MapSlotItem>();
+
+                //检查是否为同一个设施
+                if (linkStartSlot.x == itemSlot.FacilityKeyID)
+                {
+                    Debug.Log("Can not link same facility");
+                }
+                //检查是否为同种类孔
+                else if (itemSlot.slotType == linkStartSlotType)
+                {
+                    Debug.Log("Can not link slots in the same type");
+                }
+                else
+                {
+                    //检查是否该Slot已满
+                    SceneGameData sceneGameData = PublicTool.GetSceneGameData();
+                    if (sceneGameData.dicFacility.ContainsKey(itemSlot.FacilityKeyID))
+                    {
+                        FacilitySetData facilityData = sceneGameData.dicFacility[itemSlot.FacilityKeyID];
+                        //如果该Slot是空的
+                        if (itemSlot.slotType == SlotType.In && facilityData.listSlotIn.Count > itemSlot.slotID && facilityData.listSlotIn[itemSlot.slotID].x < 0)
+                        {
+                            //建立连接 Drop的点为入孔
+                            haveSetLink = true;
+                            EventCenter.Instance.EventTrigger("SetLink", new SetLinkInfo(linkStartSlot.x, linkStartSlot.y, itemSlot.FacilityKeyID, itemSlot.slotID));
+                        }
+                        else if (itemSlot.slotType == SlotType.Out && facilityData.listSlotOut.Count > itemSlot.slotID && facilityData.listSlotOut[itemSlot.slotID].x < 0)
+                        {
+                            //建立连接  Drop的点为出孔
+                            haveSetLink = true;
+                            EventCenter.Instance.EventTrigger("SetLink", new SetLinkInfo(itemSlot.FacilityKeyID, itemSlot.slotID, linkStartSlot.x, linkStartSlot.y));
+                        }
+                        else
+                        {
+                            Debug.Log("Invalid Slot");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #endregion
+
+    #region CheckDelete
 
     private void InvokeDelete()
     {
@@ -263,18 +322,55 @@ public class InputMgr : MonoSingleton<InputMgr>
             return;
         }
 
+        //检查是否删掉了设施
+        if (CheckDeleteFacility())
+        {
+            return;
+        }
+
+        //检查是否删掉了线
+        if (CheckDeleteLine())
+        {
+            return;
+        }
+    }
+
+    /// <summary>
+    /// 检查是否删掉了设施
+    /// </summary>
+    /// <returns></returns>
+    private bool CheckDeleteFacility()
+    {
         RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapFacility"));
         if (hit.transform != null && hit.transform.parent.GetComponent<MapFacilityItem>() != null)
         {
-            Debug.Log("HitFacility");
             MapFacilityItem itemFacility = hit.transform.parent.GetComponent<MapFacilityItem>();
             EventCenter.Instance.EventTrigger("DeleteFacility", itemFacility.GetData().keyID);
+            //和Drag的不同 这里删掉才算 因为有时候会有叠加关系
+            return true;
         }
-
+        return false;
     }
 
-
+    private bool CheckDeleteLine()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("MapLine"));
+        if (hit.transform != null && hit.transform.parent.GetComponent<MapLineItem>() != null)
+        {
+            MapLineItem itemLine = hit.transform.parent.GetComponent<MapLineItem>();
+            EventCenter.Instance.EventTrigger("DeleteLink", new DeleteLinkInfo(itemLine.GetOutSlot().FacilityKeyID,itemLine.GetOutSlot().slotID,
+                itemLine.GetInSlot().FacilityKeyID,itemLine.GetInSlot().slotID));
+            //和Drag的不同 这里删掉才算 因为有时候会有叠加关系
+            return true;
+        }
+        return false;
+    }
     #endregion
+
+
+
+
+
 
 
     #region RayCheck

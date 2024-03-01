@@ -45,9 +45,8 @@ public class SceneGameMgr : MonoBehaviour
         EventCenter.Instance.AddEventListener("SetFacility", SetFacilityEvent);
         EventCenter.Instance.AddEventListener("DeleteFacility", DeleteFacilityEvent);
         EventCenter.Instance.AddEventListener("SetLink", SetLinkEvent);
-
+        EventCenter.Instance.AddEventListener("DeleteLink", DeleteLinkEvent);
     }
-
 
 
     public void OnDestroy()
@@ -55,6 +54,7 @@ public class SceneGameMgr : MonoBehaviour
         EventCenter.Instance.RemoveEventListener("SetFacility", SetFacilityEvent);
         EventCenter.Instance.RemoveEventListener("DeleteFacility", DeleteFacilityEvent);
         EventCenter.Instance.RemoveEventListener("SetLink", SetLinkEvent);
+        EventCenter.Instance.RemoveEventListener("DeleteLink", DeleteLinkEvent);
 
     }
 
@@ -138,5 +138,15 @@ public class SceneGameMgr : MonoBehaviour
         mapMgr.UpdateLine();
     }
 
+    private void DeleteLinkEvent(object arg0)
+    {
+        DeleteLinkInfo info = (DeleteLinkInfo)arg0;
+        FacilitySetData tarDataOut = sceneGameData.GetFacility(info.outKeyID);
+        tarDataOut.DisjoinSlotOut(info.outSlotID);
+        FacilitySetData tarDataIn = sceneGameData.GetFacility(info.inKeyID);
+        tarDataOut.DisjoinSlotIn(info.inSlotID);
+        //±Ìœ÷≤„
+        mapMgr.UpdateLine();
+    }
     #endregion
 }

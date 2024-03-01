@@ -33,3 +33,19 @@ public struct SetLinkInfo
         this.inSlotID = inSlotID;
     }
 }
+
+public struct DeleteLinkInfo
+{
+    public int outKeyID;
+    public int outSlotID;
+    public int inKeyID;
+    public int inSlotID;
+
+    public DeleteLinkInfo(int outKeyID, int outSlotID, int inKeyID, int inSlotID)
+    {
+        this.outKeyID = outKeyID;
+        this.outSlotID = outSlotID;
+        this.inKeyID = inKeyID;
+        this.inSlotID = inSlotID;
+    }
+}

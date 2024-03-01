@@ -18,6 +18,16 @@ public class MapLineItem : MonoBehaviour
         UpdateLine();
     }
 
+    public MapSlotItem GetOutSlot()
+    {
+        return outSlot;
+    }
+
+    public MapSlotItem GetInSlot()
+    {
+        return inSlot;
+    }
+
     /// <summary>
     /// 之后如果做移动功能的话 可能会放Update里
     /// </summary>
