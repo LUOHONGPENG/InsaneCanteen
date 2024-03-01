@@ -8,6 +8,7 @@ public class ExcelDataMgr : MonoSingleton<ExcelDataMgr>
     public FoodExcelData foodExcelData;
     public FacilityExcelData facilityExcelData;
     public RuleExcelData ruleExcelData;
+    public LevelExcelData levelExcelData;
 
 
     public IEnumerator IE_Init()
@@ -18,13 +19,14 @@ public class ExcelDataMgr : MonoSingleton<ExcelDataMgr>
         foodExcelData = ExcelManager.Instance.GetExcelData<FoodExcelData, FoodExcelItem>();
         facilityExcelData = ExcelManager.Instance.GetExcelData<FacilityExcelData, FacilityExcelItem>();
         ruleExcelData = ExcelManager.Instance.GetExcelData<RuleExcelData, RuleExcelItem>();
+        levelExcelData = ExcelManager.Instance.GetExcelData<LevelExcelData, LevelExcelItem>();
         Debug.Log("Basic Initialize Excel Data");
 
         //Speical Initialization
         //特殊的初始化，比如规则表要在初始化时进行排序
         languageExcelData.Init();
         ruleExcelData.Init();
-
+        levelExcelData.Init();
 
         yield break;
     }

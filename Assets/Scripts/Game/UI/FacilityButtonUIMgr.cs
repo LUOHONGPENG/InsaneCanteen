@@ -16,9 +16,15 @@ public class FacilityButtonUIMgr : MonoBehaviour
     {
         PublicTool.ClearChildItem(tfButton);
 
-        for(int i = 0; i < GameGlobal.testFacilityID.Length; i++)
+    }
+
+    public void SetFacility(List<int> listFacility)
+    {
+        PublicTool.ClearChildItem(tfButton);
+
+        for (int i = 0; i < listFacility.Count; i++)
         {
-            int tempID = GameGlobal.testFacilityID[i];
+            int tempID = listFacility[i];
             GameObject objButton = GameObject.Instantiate(pfButton, tfButton);
             FacilityButtonUIItem itemButton = objButton.GetComponent<FacilityButtonUIItem>();
             itemButton.Init(tempID);

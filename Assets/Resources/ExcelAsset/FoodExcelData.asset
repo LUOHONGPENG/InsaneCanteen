@@ -28,3 +28,6 @@ MonoBehaviour:
   - id: 2003
     name: "\u841D\u535C\u874C\u86AA\u7CA5"
     iconUrl: 
+  - id: 9999
+    name: "\u7126\u70AD"
+    iconUrl: 

@@ -17,5 +17,4 @@ public static class GameGlobal
     public static float mapSlotSpacingY = 0.3f;
     #endregion
 
-    public static int[] testFacilityID = { 1001,2001 };
 }

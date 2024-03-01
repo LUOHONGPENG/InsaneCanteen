@@ -19,4 +19,8 @@ public class UIMgr : MonoBehaviour
         isInit = true;
     }
 
+    public void NewLevelSetFacility(List<int> listFacility)
+    {
+        facilityButtonUIMgr.SetFacility(listFacility);
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 此处用于装载Event使用的Info结构体
+/// 此处主要用于装载Event使用的Info结构体
 /// </summary>
 
 public struct SetFacilityInfo
@@ -48,4 +48,19 @@ public struct DeleteLinkInfo
         this.inKeyID = inKeyID;
         this.inSlotID = inSlotID;
     }
+}
+
+public class FacilityDeliverRequest
+{
+    public int foodTypeID;
+    public int tarFacilityKeyID;
+    public int tarFacilitySlotID;
+
+    public FacilityDeliverRequest(int foodTypeID,int tarFacilityKeyID,int tarFacilitySlotID)
+    {
+        this.foodTypeID = foodTypeID;
+        this.tarFacilityKeyID = tarFacilityKeyID;
+        this.tarFacilitySlotID = tarFacilitySlotID;
+    }
+
 }

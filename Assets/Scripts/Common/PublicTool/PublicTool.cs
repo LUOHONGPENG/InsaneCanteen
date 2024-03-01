@@ -108,6 +108,16 @@ public partial class PublicTool
         return ExcelDataMgr.Instance.foodExcelData.GetExcelItem(foodID);
     }
 
+    public static LevelExcelItem GetLevelItem(int levelID)
+    {
+        return ExcelDataMgr.Instance.levelExcelData.GetLevelItem(levelID);
+    }
+
+    public static int GetMaxLevel()
+    {
+        return ExcelDataMgr.Instance.levelExcelData.maxLevel;
+    }
+
     public static string GetLanguageText(string key)
     {
         return ExcelDataMgr.Instance.languageExcelData.GetText(key);
