@@ -7,6 +7,11 @@ public enum SceneName
     Game
 }
 
+public enum LanguageType
+{
+    CN
+}
+
 public enum InputState
 {
     Build,

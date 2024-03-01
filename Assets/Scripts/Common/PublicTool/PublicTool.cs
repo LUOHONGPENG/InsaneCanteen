@@ -107,6 +107,11 @@ public partial class PublicTool
     {
         return ExcelDataMgr.Instance.foodExcelData.GetExcelItem(foodID);
     }
+
+    public static string GetLanguageText(string key)
+    {
+        return ExcelDataMgr.Instance.languageExcelData.GetText(key);
+    }
     #endregion
 
 }
