@@ -10,8 +10,14 @@ public enum SceneName
 public enum InputState
 {
     Build,
-    Delete,
     Play
+}
+
+public enum FacilityType
+{
+    Source,
+    Mixer,
+    End
 }
 
 public enum SlotType

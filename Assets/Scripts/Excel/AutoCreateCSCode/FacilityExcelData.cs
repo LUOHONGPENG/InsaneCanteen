@@ -13,7 +13,7 @@ public partial class FacilityExcelItem : ExcelItemBase
 	public int sizeX;
 	public int sizeY;
 	public int inSlot;
-	public int outSlot;
+	public FacilityType type;
 }
 
 [CreateAssetMenu(fileName = "FacilityExcelData", menuName = "Excel To ScriptableObject/Create FacilityExcelData", order = 1)]
@@ -39,7 +39,7 @@ public class FacilityAssetAssignment
 			items[i].sizeX = Convert.ToInt32(allItemValueRowList[i]["sizeX"]);
 			items[i].sizeY = Convert.ToInt32(allItemValueRowList[i]["sizeY"]);
 			items[i].inSlot = Convert.ToInt32(allItemValueRowList[i]["inSlot"]);
-			items[i].outSlot = Convert.ToInt32(allItemValueRowList[i]["outSlot"]);
+			items[i].type = (FacilityType) Enum.Parse(typeof(FacilityType), allItemValueRowList[i]["type"], true);
 		}
 		FacilityExcelData excelDataAsset = ScriptableObject.CreateInstance<FacilityExcelData>();
 		excelDataAsset.items = items;

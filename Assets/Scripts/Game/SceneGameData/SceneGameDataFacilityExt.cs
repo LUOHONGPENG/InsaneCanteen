@@ -169,13 +169,29 @@ public class FacilitySetData
         FacilityExcelItem excelItem = GetExcelItem();
         if (excelItem != null)
         {
+            int outSlotNum = 0;
+            int inSlotNum = 0;
+            switch (excelItem.type)
+            {
+                case FacilityType.Source:
+                    outSlotNum = 1;
+                    break;
+                case FacilityType.Mixer:
+                    outSlotNum = 1;
+                    inSlotNum = excelItem.inSlot;
+                    break;
+                case FacilityType.End:
+                    inSlotNum = 1;
+                    break;
+            }
+
             listSlotOut.Clear();
-            for(int i = 0; i < excelItem.outSlot; i++)
+            for(int i = 0; i < outSlotNum; i++)
             {
                 listSlotOut.Add(new Vector2Int(-1, -1));
             }
             listSlotIn.Clear();
-            for (int i = 0; i < excelItem.inSlot; i++)
+            for (int i = 0; i < inSlotNum; i++)
             {
                 listSlotIn.Add(new Vector2Int(-1, -1));
             }
