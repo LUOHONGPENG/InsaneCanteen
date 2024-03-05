@@ -32,7 +32,7 @@ public class LinePreviewUIMgr : MonoBehaviour
         Vector2 direction = posEnd - posStart;
         float length = Mathf.Sqrt(direction.sqrMagnitude);
         rtLine.transform.position = (posStart + posEnd) / 2;
-        rtLine.sizeDelta = new Vector2(5f, length*100);
+        rtLine.sizeDelta = new Vector2(5f, length*108.5f);
 
         float angle = Vector2.Angle(Vector2.up, direction);
         if (direction.x > 0)
